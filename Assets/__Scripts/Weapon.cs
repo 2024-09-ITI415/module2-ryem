@@ -120,22 +120,39 @@ public class Weapon : MonoBehaviour {
             case WeaponType.blaster:
                 p = MakeProjectile();
                 p.rigid.velocity = vel;
+                lastShotTime = Time.time; // Set time after shot
                 break;
 
             case WeaponType.spread:
-                p = MakeProjectile(); // Make middle Projectile
+                // Make middle Projectile
+                p = MakeProjectile(false); // Pass false to not update lastShotTime
                 p.rigid.velocity = vel;
-                p = MakeProjectile(); // Make right Projectile
+                
+                // Make right Projectiles
+                p = MakeProjectile(false);
                 p.transform.rotation = Quaternion.AngleAxis(10, Vector3.back);
                 p.rigid.velocity = p.transform.rotation * vel;
-                p = MakeProjectile(); // Make left Projectile
+                
+                p = MakeProjectile(false);
+                p.transform.rotation = Quaternion.AngleAxis(20, Vector3.back);
+                p.rigid.velocity = p.transform.rotation * vel;
+                
+                // Make left Projectiles
+                p = MakeProjectile(false);
                 p.transform.rotation = Quaternion.AngleAxis(-10, Vector3.back);
                 p.rigid.velocity = p.transform.rotation * vel;
+                
+                p = MakeProjectile(false);
+                p.transform.rotation = Quaternion.AngleAxis(-20, Vector3.back);
+                p.rigid.velocity = p.transform.rotation * vel;
+                
+                // Update lastShotTime after all projectiles are fired
+                lastShotTime = Time.time;
                 break;
         }
     }
 
-    public Projectile MakeProjectile()
+    public Projectile MakeProjectile(bool updateLastShotTime = true)
     {
         GameObject go = Instantiate<GameObject>(def.projectilePrefab);
         if(transform.parent.gameObject.tag == "Hero")
@@ -152,7 +169,10 @@ public class Weapon : MonoBehaviour {
         go.transform.SetParent(PROJECTILE_ANCHOR, true);
         Projectile p = go.GetComponent<Projectile>();
         p.type = type;
-        lastShotTime = Time.time;
+        if(updateLastShotTime)
+        {
+            lastShotTime = Time.time;
+        }
         return p;
     }
 }
