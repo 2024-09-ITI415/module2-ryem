@@ -24,6 +24,7 @@ public class Projectile : MonoBehaviour {
             SetType(value);
         }
     }
+
     private void Awake()
     {
         bndCheck = GetComponent<BoundsCheck>();
@@ -35,7 +36,7 @@ public class Projectile : MonoBehaviour {
     {
         if (bndCheck.offUp)
         {
-            Destroy(gameObject);
+            Destroy(gameObject);  // Destroy the projectile if it goes off screen
         }
     }
 
@@ -50,5 +51,27 @@ public class Projectile : MonoBehaviour {
         _type = eType;
         WeaponDefinition def = Main.GetWeaponDefinition(_type);
         rend.material.color = def.projectileColor;
+    }
+
+    // Handle projectile collisions
+    private void OnTriggerEnter(Collider other)
+    {
+        // Check if the projectile collided with an enemy
+        if (other.CompareTag("Enemy"))
+        {
+            Enemy enemy = other.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                WeaponDefinition def = Main.GetWeaponDefinition(_type);
+                // Apply damage on hit to the enemy
+                //enemy.TakeDamage(def.damageOnHit);
+                
+                // If it's a laser, destroy it after applying damage
+                if (_type == WeaponType.laser)
+                {
+                    Destroy(gameObject); // Destroy the laser after it hits
+                }
+            }
+        }
     }
 }
