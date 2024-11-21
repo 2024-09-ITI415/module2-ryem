@@ -1146,13 +1146,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b89945d366f74234594d375c5597c723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
-  rollMult: -45
-  pitchMult: 30
+  speed: 50
+  rollMult: -50
+  pitchMult: 40
   gameRestartDelay: 2
   projectilePrefab: {fileID: 1899541879965282, guid: 59a4640edad59f94a87c1d235355cb6a,
     type: 3}
-  projectileSpeed: 40
+  projectileSpeed: 60
   weapons:
   - {fileID: 1374778674}
   - {fileID: 2031523527}
