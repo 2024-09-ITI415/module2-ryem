@@ -170,8 +170,17 @@ public class Weapon : MonoBehaviour
         p.rigid.velocity = p.transform.rotation * vel;
 
         p = MakeProjectile(false);
+        p.transform.rotation = Quaternion.AngleAxis(15, Vector3.back);
+        p.rigid.velocity = p.transform.rotation * vel;
+
+        p = MakeProjectile(false);
         p.transform.rotation = Quaternion.AngleAxis(20, Vector3.back);
         p.rigid.velocity = p.transform.rotation * vel;
+
+        p = MakeProjectile(false);
+        p.transform.rotation = Quaternion.AngleAxis(25, Vector3.back);
+        p.rigid.velocity = p.transform.rotation * vel;
+
 
         // Left projectiles
         p = MakeProjectile(false);
@@ -179,34 +188,43 @@ public class Weapon : MonoBehaviour
         p.rigid.velocity = p.transform.rotation * vel;
 
         p = MakeProjectile(false);
+        p.transform.rotation = Quaternion.AngleAxis(-15, Vector3.back);
+        p.rigid.velocity = p.transform.rotation * vel;
+
+        p = MakeProjectile(false);
         p.transform.rotation = Quaternion.AngleAxis(-20, Vector3.back);
+        p.rigid.velocity = p.transform.rotation * vel;
+
+        p = MakeProjectile(false);
+        p.transform.rotation = Quaternion.AngleAxis(-25, Vector3.back);
         p.rigid.velocity = p.transform.rotation * vel;
     }
 
-    private ContinuousLaser(Vector3 vel)
-    {
-        Projectile p;
-        p = MakeProjectile(false);
-        p.rigid.velocity = vel;
+    private void ContinuousLaser(Vector3 vel)
+{
+    Projectile p;
+    p = MakeProjectile(false);
+    p.rigid.velocity = vel;
 
-        // Right projectiles
-        p = MakeProjectile(false);
-        p.transform.rotation = Quaternion.AngleAxis(10, Vector3.back);
-        p.rigid.velocity = p.transform.rotation * vel;
+    // Right projectiles
+    p = MakeProjectile(false);
+    p.transform.rotation = Quaternion.AngleAxis(10, Vector3.back);
+    p.rigid.velocity = p.transform.rotation * vel;
 
-        p = MakeProjectile(false);
-        p.transform.rotation = Quaternion.AngleAxis(20, Vector3.back);
-        p.rigid.velocity = p.transform.rotation * vel;
+    p = MakeProjectile(false);
+    p.transform.rotation = Quaternion.AngleAxis(20, Vector3.back);
+    p.rigid.velocity = p.transform.rotation * vel;
 
-        // Left projectiles
-        p = MakeProjectile(false);
-        p.transform.rotation = Quaternion.AngleAxis(-10, Vector3.back);
-        p.rigid.velocity = p.transform.rotation * vel;
+    // Left projectiles
+    p = MakeProjectile(false);
+    p.transform.rotation = Quaternion.AngleAxis(-10, Vector3.back);
+    p.rigid.velocity = p.transform.rotation * vel;
 
-        p = MakeProjectile(false);
-        p.transform.rotation = Quaternion.AngleAxis(-20, Vector3.back);
-        p.rigid.velocity = p.transform.rotation * vel;
-        }
+    p = MakeProjectile(false);
+    p.transform.rotation = Quaternion.AngleAxis(-20, Vector3.back);
+    p.rigid.velocity = p.transform.rotation * vel;
+}
+
     
 
     public Projectile MakeProjectile(bool updateLastShotTime = true)
